@@ -122,8 +122,6 @@ function draw() {
     yTopEdge = y - ballRadius;
     yBotEdge = y + ballRadius;
 
-    updateEdges();
-
     // Drawing game objects
     drawBall();
     drawPaddle();
@@ -270,19 +268,5 @@ function drawLives() {
     ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
 
-function updateEdges() {
-    ball.leftEdge.x = ball.x - ball.radius;
-    ball.leftEdge.y = ball.y;
-    ball.rightEdge.x = ball.x + ball.radius;
-    ball.rightEdge.y = ball.y;
-    ball.topEdge.x = ball.x;
-    ball.topEdge.y = ball.y - ball.radius;
-    ball.bottomEdge.x = ball.x;
-    ball.bottomEdge.y = ball.y - ball.radius;
-
-    // console.log(ball.pos.x, ball.pos.y)
-}
-
-// Running the game based on the interval generated from the entered framerate
-// const interval = setInterval(draw, timeInterval);
+// Running the game
 draw();
