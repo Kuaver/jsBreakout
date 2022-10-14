@@ -3,10 +3,52 @@ const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
 // Size of the canvas
-canvas.width = 560;
-canvas.height = 560;
+canvas.width = 480;
+canvas.height = 960;
 
 // Parameters for the ball
+const ball = {
+    radius: 10,
+    pos: {
+        x: 0,
+        y: 0,
+    },
+    startingPoint: {
+        x: canvas.width / 2,
+        y: canvas.height - 30 - 5,
+    },
+    rightEdge: {
+        x: 0,
+        y: 0,
+    },
+    leftEdge: {
+        x: 0,
+        y: 0,
+    },
+    topEdge: {
+        x: 0,
+        y: 0,
+    },
+    bottomEdge: {
+        x: 0,
+        y: 0,
+    },
+};
+
+ball.pos.x = ball.startingPoint.x;
+ball.pos.y = ball.startingPoint.y;
+
+ball.leftEdge.x = ball.x - ball.radius;
+ball.leftEdge.y = ball.y;
+ball.rightEdge.x = ball.x + ball.radius;
+ball.rightEdge.y = ball.y;
+ball.topEdge.x = ball.x;
+ball.topEdge.y = ball.y - ball.radius;
+ball.bottomEdge.x = ball.x;
+ball.bottomEdge.y = ball.y - ball.radius;
+
+console.log(ball);
+
 const ballRadius = 10;
 const ballBaseX = canvas.width / 2;
 const ballBaseY = canvas.height - 30 - 5;
@@ -31,7 +73,7 @@ let paddleColor = "#0095dd";
 
 // Parameters for the bricks
 const brickRowCount = 5;
-const brickColumnCount = 2;
+const brickColumnCount = 10;
 const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
@@ -122,11 +164,13 @@ function draw() {
     yTopEdge = y - ballRadius;
     yBotEdge = y + ballRadius;
 
+    updateEdges();
+
     // Drawing game objects
     drawBall();
     drawPaddle();
     drawBricks();
-    
+
     // Drawing game text
     drawScore();
     drawLives();
@@ -163,6 +207,9 @@ function draw() {
 
     x += dx;
     y += dy;
+
+    ball.pos.x += dx;
+    ball.pos.y += dy;
 
     requestAnimationFrame(draw);
 }
@@ -266,6 +313,19 @@ function drawLives() {
     ctx.font = "16px Arial";
     ctx.fillStyle = livesColor;
     ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
+}
+
+function updateEdges() {
+    ball.leftEdge.x = ball.x - ball.radius;
+    ball.leftEdge.y = ball.y;
+    ball.rightEdge.x = ball.x + ball.radius;
+    ball.rightEdge.y = ball.y;
+    ball.topEdge.x = ball.x;
+    ball.topEdge.y = ball.y - ball.radius;
+    ball.bottomEdge.x = ball.x;
+    ball.bottomEdge.y = ball.y - ball.radius;
+
+    // console.log(ball.pos.x, ball.pos.y)
 }
 
 // Running the game based on the interval generated from the entered framerate
