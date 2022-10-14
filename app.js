@@ -7,48 +7,6 @@ canvas.width = 480;
 canvas.height = 960;
 
 // Parameters for the ball
-const ball = {
-    radius: 10,
-    pos: {
-        x: 0,
-        y: 0,
-    },
-    startingPoint: {
-        x: canvas.width / 2,
-        y: canvas.height - 30 - 5,
-    },
-    rightEdge: {
-        x: 0,
-        y: 0,
-    },
-    leftEdge: {
-        x: 0,
-        y: 0,
-    },
-    topEdge: {
-        x: 0,
-        y: 0,
-    },
-    bottomEdge: {
-        x: 0,
-        y: 0,
-    },
-};
-
-ball.pos.x = ball.startingPoint.x;
-ball.pos.y = ball.startingPoint.y;
-
-ball.leftEdge.x = ball.x - ball.radius;
-ball.leftEdge.y = ball.y;
-ball.rightEdge.x = ball.x + ball.radius;
-ball.rightEdge.y = ball.y;
-ball.topEdge.x = ball.x;
-ball.topEdge.y = ball.y - ball.radius;
-ball.bottomEdge.x = ball.x;
-ball.bottomEdge.y = ball.y - ball.radius;
-
-console.log(ball);
-
 const ballRadius = 10;
 const ballBaseX = canvas.width / 2;
 const ballBaseY = canvas.height - 30 - 5;
@@ -207,9 +165,6 @@ function draw() {
 
     x += dx;
     y += dy;
-
-    ball.pos.x += dx;
-    ball.pos.y += dy;
 
     requestAnimationFrame(draw);
 }
